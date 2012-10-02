@@ -1,17 +1,30 @@
 package org.onedigit.algorithms.graph;
 
+/**
+ * An edge of a graph
+ * 
+ * @author ahmed
+ *
+ * @param <E>
+ */
 public class Edge<E>
 {
-    Node<E> begin;
-    Node<E> end;
-    
-    public Edge(Node<E> begin, Node<E> end)
+    Node<E> source;
+    Node<E> destination;
+
+    public Edge(Node<E> source, Node<E> destination)
     {
-        this.begin = begin;
-        this.end = end;
+        this.source = source;
+        this.destination = destination;
     }
-    
-    Node<E> begin() { return begin; }
-    
-    Node<E> end() { return end; }
+
+    Node<E> source()
+    {
+        return source;
+    }
+
+    Node<E> destination()
+    {
+        return destination;
+    }
 }

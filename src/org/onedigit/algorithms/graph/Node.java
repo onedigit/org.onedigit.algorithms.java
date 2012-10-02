@@ -4,13 +4,17 @@ public class Node<E>
 {
     E value;
     
+    public Node(E value)
+    {
+        this.value = value;
+    }
+    
     @Override
     public boolean equals(Object other)
     {
         boolean result = false;
         if (other instanceof Node) {
-            @SuppressWarnings("unchecked")
-            Node<E> that = (Node<E>)other;
+            Node<?> that = (Node<?>)other;
             result = that.value == this.value;
         }
         return result;

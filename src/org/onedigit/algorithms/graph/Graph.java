@@ -1,6 +1,7 @@
 package org.onedigit.algorithms.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,16 +14,27 @@ import java.util.Map;
  */
 public class Graph<E>
 {
-    private Map<Node<E>, List<Node<E>>> adjacencyList;
+    private Map<Node<E>, List<Edge<E>>> adjacencyList;
     
-    public void addEdge(Edge<E> edge)
+    public Graph()
     {
-        List<Node<E>> list = adjacencyList.get(edge.begin());
-        if (list == null) {
-            list = new ArrayList<>();
-            list.add(edge.end());
-        } else {
-            
-        }
+        adjacencyList = new HashMap<>();
+    }
+    
+    public void addEdge(Node<E> source, Node<E> destination)
+    {
+        List<Edge<E>> edges = adjacencyList.get(source);
+        if (edges == null) {
+            edges = new ArrayList<>();
+            adjacencyList.put(source, edges);
+        } 
+        edges.add(new Edge<>(source, destination));
+    }
+    
+    // TODO
+    @Override
+    public String toString()
+    {
+        return "";
     }
 }
