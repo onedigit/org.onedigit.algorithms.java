@@ -2,6 +2,10 @@ package org.onedigit.algorithms.graph;
 
 public class Node<E>
 {
+    public enum Colour {
+        WHITE, GRAY, BLACK
+    }
+    
     E value;
     
     public Node(E value)
