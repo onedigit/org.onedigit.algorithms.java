@@ -44,4 +44,14 @@ public class Edge<E>
     {
         return target;
     }
+    
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(source);
+        sb.append("--");
+        sb.append(target);
+        return sb.toString();
+    }
 }

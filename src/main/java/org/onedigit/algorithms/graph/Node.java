@@ -29,4 +29,10 @@ public class Node<E>
     {
         return value.hashCode();
     }
+    
+    @Override
+    public String toString()
+    {
+        return String.valueOf(value);
+    }
 }
