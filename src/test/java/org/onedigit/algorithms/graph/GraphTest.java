@@ -1,4 +1,4 @@
-package org.onedigit.algorithms;
+package org.onedigit.algorithms.graph;
 
 import static org.junit.Assert.*;
 
