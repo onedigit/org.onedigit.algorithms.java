@@ -1,5 +1,13 @@
 package org.onedigit.algorithms.tree;
 
+/**
+ * Binary search tree.
+ * Reference: Introduction to Algorithms, CLRS, 3rd Edition
+ *  
+ * @author ahmed
+ *
+ * @param <T>
+ */
 public class BinarySearchTree<T extends Comparable<? super T>>
 {
     private Node<T> root;
@@ -40,46 +48,54 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         
     }
     
-    public void inOrderTreeWalk()
+    public String inOrderTreeWalk()
     {
-        inOrderTreeWalk(root);
+        StringBuilder sb = new StringBuilder();
+        inOrderTreeWalk(root, sb);
+        return sb.toString();
     }
     
-    private void inOrderTreeWalk(Node<T> node)
+    private void inOrderTreeWalk(Node<T> node, StringBuilder sb)
     {
-        // StringBuilder sb = new StringBuilder();
         if (node != null) {
-            inOrderTreeWalk(node.left);
-            System.out.print(node.key + " ");
-            inOrderTreeWalk(node.right);
+            inOrderTreeWalk(node.left, sb);
+            sb.append(node.key);
+            sb.append(" ");
+            inOrderTreeWalk(node.right, sb);
         }
     }    
     
-    public void preOrderTreeWalk()
+    public String preOrderTreeWalk()
     {
-        preOrderTreeWalk(root);
+        StringBuilder sb = new StringBuilder();
+        preOrderTreeWalk(root, sb);
+        return sb.toString();
     }
     
-    private void preOrderTreeWalk(Node<T> node)
+    private void preOrderTreeWalk(Node<T> node, StringBuilder sb)
     {
         if (node != null) {
-            System.out.print(node.key + " ");
-            preOrderTreeWalk(node.left);
-            preOrderTreeWalk(node.right);
+            sb.append(node.key);
+            sb.append(" ");
+            preOrderTreeWalk(node.left, sb);
+            preOrderTreeWalk(node.right, sb);
         }
     }
 
-    public void postOrderTreeWalk()
+    public String postOrderTreeWalk()
     {
-        postOrderTreeWalk(root);
+        StringBuilder sb = new StringBuilder();
+        postOrderTreeWalk(root, sb);
+        return sb.toString();
     }
 
-    private void postOrderTreeWalk(Node<T> node)
+    private void postOrderTreeWalk(Node<T> node, StringBuilder sb)
     {
         if (node != null) {
-            postOrderTreeWalk(node.left);
-            postOrderTreeWalk(node.right);
-            System.out.print(node.key + " ");
+            postOrderTreeWalk(node.left, sb);
+            postOrderTreeWalk(node.right, sb);
+            sb.append(node.key);
+            sb.append(" ");
         }
     }
     
@@ -112,16 +128,13 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         bst.insert(two);
         bst.insert(five_2);
 
-        System.out.print("InOrder: ");
-        bst.inOrderTreeWalk();
+        System.out.print("InOrder: " + bst.inOrderTreeWalk());
         System.out.println();
         
-        System.out.print("PreOrder: ");
-        bst.preOrderTreeWalk();
+        System.out.print("PreOrder: " + bst.preOrderTreeWalk());
         System.out.println();
         
-        System.out.print("PostOrder: ");
-        bst.postOrderTreeWalk();
+        System.out.print("PostOrder: " + bst.postOrderTreeWalk());
         System.out.println();
     }
 }
