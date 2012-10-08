@@ -12,41 +12,105 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 {
     private Node<T> root;
     
+    // ------------------------------------------------------------------------
+    
     public BinarySearchTree()
     {
     }
+    
+    // ------------------------------------------------------------------------
     
     public void add(T key)
     {
         
     }
     
+    // ------------------------------------------------------------------------    
+    
     public void insert(Node<T> node)
     {
-        Node<T> pred = null;
+        Node<T> y = null;
         Node<T> x = root;
         while (x != null) {
-            pred = x;
+            y = x;
             if (node.key.compareTo(x.key) < 0) {
                 x = x.left;
             } else {
                 x = x.right;
             }
         }
-        node.pred = pred;
-        if (pred == null) {
+        node.pred = y;
+        if (y == null) {
             root = node; // Tree was empty
-        } else if (node.key.compareTo(pred.key) < 0){
-            pred.left = node;
+        } else if (node.key.compareTo(y.key) < 0){
+            y.left = node;
         } else {
-            pred.right = node;
+            y.right = node;
         }
     }
     
-    public void remove(T key)
+    // ------------------------------------------------------------------------
+    
+    public void remove(Node<T> node)
     {
-        
+        if (node.left == null) {
+            transplant(node, node.right);
+        } else if (node.right == null) {
+            transplant(node, node.left);
+        }
     }
+    
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Transplant replaces one subtree as a child of its parent
+     * with another subtree.  when transplant replaces the subtree
+     * rooted at node u with the subtree rooted at node v, node
+     * u's parent becomes node v's parent, and u's parent ends up
+     * having v as its appropriate child.
+     * 
+     * Reference: CLRS, 3rd Edition
+     * 
+     * @param u
+     * @param v
+     */
+    private void transplant(Node<T> u, Node<T> v)
+    {
+        if (u.pred == null) { // u is root
+            root = v;
+        } else if (u.equals(u.pred.left)) {
+            u.pred.left = v;
+        } else {
+            u.pred.right = v;
+        }
+        if (v != null) {
+            v.pred = u.pred;
+        }
+    }
+    
+    // ------------------------------------------------------------------------
+    
+    /**
+     * Recursive search down the tree. Running time is O(h) where h is the
+     * height of the tree.
+     * 
+     * @param x
+     * @param key
+     * @return
+     */
+    public Node<T> search_r(Node<T> x, T key)
+    {
+        if (x == null || x.key.equals(key)) {
+            return x;
+        } 
+        if (key.compareTo(x.key) < 0) {
+            return search_r(x.left, key);
+        } else {
+            return search_r(x.right, key);
+        }
+    }
+    
+    // ------------------------------------------------------------------------
     
     public String inOrderTreeWalk()
     {
@@ -65,6 +129,8 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         }
     }    
     
+    // ------------------------------------------------------------------------
+    
     public String preOrderTreeWalk()
     {
         StringBuilder sb = new StringBuilder();
@@ -82,6 +148,8 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         }
     }
 
+    // ------------------------------------------------------------------------
+    
     public String postOrderTreeWalk()
     {
         StringBuilder sb = new StringBuilder();
@@ -105,6 +173,8 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         StringBuilder sb = new StringBuilder();
         return sb.toString();
     }
+    
+    // ------------------------------------------------------------------------    
     
     public static void main(String[] args)
     {
