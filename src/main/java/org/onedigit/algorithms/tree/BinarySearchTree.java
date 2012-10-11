@@ -113,6 +113,29 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     
     // ------------------------------------------------------------------------
     
+	/**
+	 * Iterative search
+	 */
+    public Node<T> search(T key)
+    {
+    	return search(root, key);
+    }
+    
+    public Node<T> search(Node<T> node, T key)
+    {
+    	Node<T> x = node;
+    	while (x != null && key != x.key) {
+    		if (key.compareTo(x.key) < 0) {
+    			x = x.left;
+    		} else {
+    			x = x.right;
+    		}
+    	}
+    	return x;
+    }
+    
+    // ------------------------------------------------------------------------
+    
     public String inOrderTreeWalk()
     {
         StringBuilder sb = new StringBuilder();
