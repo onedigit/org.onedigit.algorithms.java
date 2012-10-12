@@ -1,4 +1,4 @@
-package org.onedigit.algorithms;
+package org.onedigit.algorithms.generic;
 
 /**
  * Use dynamic programming to evaluate Fibonacci numbers.
