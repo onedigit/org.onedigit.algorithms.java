@@ -1,13 +1,19 @@
 package org.onedigit.algorithms.graph;
 
-public class Node<E>
+import java.io.Serializable;
+
+
+public class Node<E extends Comparable<? super E>> implements Comparable<Node<E>>, Serializable
 {
-    public enum Colour {
+    private static final long serialVersionUID = 1L;
+
+	public enum Colour {
         WHITE, GRAY, BLACK
     }
     
-    E value;
-    
+    private E value;
+	private Colour colour = null;
+	
     public Node(E value)
     {
         this.value = value;
@@ -30,9 +36,21 @@ public class Node<E>
         return value.hashCode();
     }
     
+	@Override
+    public int compareTo(Node<E> other)
+    {
+		return (value.compareTo(other.value()));
+    }
+	
     @Override
     public String toString()
     {
         return String.valueOf(value);
     }
+    
+	public void setColour(Colour colour) { this.colour = colour; }
+	
+	public Colour getColour() {	return colour; }   
+	
+	public E value() { return value; }
 }

@@ -1,5 +1,7 @@
 package org.onedigit.algorithms.graph;
 
+import java.io.Serializable;
+
 /**
  * An edge of a graph
  * 
@@ -7,7 +9,7 @@ package org.onedigit.algorithms.graph;
  * 
  * @param <E>
  */
-public class Edge<E>
+public class Edge<E extends Comparable<? super E>> implements Comparable<Edge<E>>, Serializable
 {
     Node<E> source;
     Node<E> target;
@@ -35,6 +37,12 @@ public class Edge<E>
         return (41 * (41 + source.hashCode()) + target.hashCode());
     }
 
+	@Override
+    public int compareTo(Edge<E> other)
+    {
+		return source.value().compareTo(target.value());
+    }
+	
     Node<E> source()
     {
         return source;

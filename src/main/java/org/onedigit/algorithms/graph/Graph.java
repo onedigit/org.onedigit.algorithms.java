@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -16,7 +15,7 @@ import java.util.TreeSet;
  * 
  * @param <E>
  */
-public class Graph<E>
+public class Graph<E extends Comparable<? super E>>
 {
     private Map<Node<E>, List<Edge<E>>> adjacencies;
 
