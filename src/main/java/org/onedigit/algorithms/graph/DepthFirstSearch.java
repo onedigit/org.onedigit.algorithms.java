@@ -9,8 +9,6 @@ import java.util.Stack;
 /**
  * Depth first traversal implementation.
  *  
- * @author Ahmed Riza
- *
  */
 public class DepthFirstSearch<T extends Comparable<? super T>> implements Serializable
 {

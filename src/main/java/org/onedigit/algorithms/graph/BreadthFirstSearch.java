@@ -10,8 +10,6 @@ import java.util.Set;
 /**
  * Breadth first traversal implementation.
  * 
- * @author Ahmed Riza
- *
  */
 public class BreadthFirstSearch<T extends Comparable<? super T>> implements Serializable
 {
