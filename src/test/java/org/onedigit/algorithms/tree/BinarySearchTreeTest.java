@@ -21,6 +21,10 @@ public class BinarySearchTreeTest
         
         System.out.print("PostOrder: " + bst.postOrderTreeWalk());
         System.out.println();
+        
+        byte b = -128;
+        short s = 32767;
+        System.out.println(Math.pow(2, 16));
     }
     
     @Test
