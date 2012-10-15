@@ -43,7 +43,7 @@ public class StringUtils
 	
 	public static void main(String[] args)
 	{
-		// reverse("Another day in paradise");
+		System.out.println(reverse("Another day in paradise"));
 		String s = reverseWords("Another day in paradise", ' ');
 		System.out.println(s);
 	}
