@@ -75,23 +75,27 @@ public class StringUtils
 		
 	public static void permute(String s)
 	{
-		int len = s.length();
-		//
-		// abc, acb, bac, bca, cab, cba
-		// abc, acb, bac, bca, cab, cba
-		// abc, acb
-		// bac, bca
-		// cab, cba
-		// 
-		// abcde
-		// a -> perm(bcde) 
-		//   b -> perm(cde)
-		//     c -> perm(de)
-		//       d -> perm(e)
-		//
 		char[] buf = s.toCharArray();
 		permute_r(buf, s.length());
 		System.out.println();
+	}
+	
+	/*
+	 * Find longest palindrome sequence in a given array.
+	 * Ex- 12345gsfggd541fhgs54321fgsdh
+	 * Ans- 12345/54321	 
+	 * 
+	 */
+	public static void longestPalindrome(String s)
+	{
+		String rev = reverse(s);
+		System.out.println(rev);
+	}
+	
+	public static boolean isPalindrome(String s)
+	{
+		String rev = reverse(s);
+		return rev.equals(s) ? true : false;
 	}
 	
 	public static void main(String[] args)
@@ -100,5 +104,9 @@ public class StringUtils
 		System.out.println(reverse("Another day in paradise"));
 		String s = reverseWords("Another day in paradise", ' ');
 		System.out.println(s);
+		System.out.println(isPalindrome("ABRACACARBA"));
+		String ps = "12345gsfggd541fhgs54321fgsdh";
+		System.out.println(ps);
+		longestPalindrome(ps);
 	}
 }

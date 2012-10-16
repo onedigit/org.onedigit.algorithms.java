@@ -84,7 +84,7 @@ public class DepthFirstSearch<T extends Comparable<? super T>> implements Serial
 			if (adj != null) {
 				Set<Node<T>> nodes = graph.getNodes(adj);
 				for (Node<T> v : nodes) {
-					if (v.value().equals(searchName)) {
+					if (v.getValue().equals(searchName)) {
 						v.setColour(Node.Colour.WHITE);
 						nodeFound = v;
 					} else if (v.getColour() == null) {
@@ -104,7 +104,7 @@ public class DepthFirstSearch<T extends Comparable<? super T>> implements Serial
 		Node<T> found = null;
 		while(!stack.isEmpty()) {
 			Node<T> t = stack.pop();
-			if(t.value().equals(searchName)) {
+			if(t.getValue().equals(searchName)) {
 				found = t;
 				break;
 			}
@@ -136,7 +136,7 @@ public class DepthFirstSearch<T extends Comparable<? super T>> implements Serial
 				stack.push(u);
 				while (!stack.isEmpty()) {
 					Node<T> t = stack.pop();
-					if (t.value().equals(searchName)) {
+					if (t.getValue().equals(searchName)) {
 						found = t;
 						break;
 					}
