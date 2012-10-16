@@ -2,7 +2,6 @@ package org.onedigit.algorithms.graph;
 
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -43,17 +42,18 @@ public class Dijkstra<E extends Comparable<? super E>>
 	public Set<Node<E>> solve(Graph<E> graph, Node<E> start)
 	{
 		initialise(graph, start);
-		Set<Node<E>> vertices = graph.getAllNodes();
-		pQ.addAll(vertices);
-		Set<Node<E>> nodes = new HashSet<>();
+		Set<Node<E>> V = graph.getAllNodes();
+		pQ.addAll(V);
+		Set<Node<E>> S = new HashSet<>();
+		// Loop maintains the invariant: v.distance = 
+		// d(u, v) where d = minimum distance
+		// pQ contains V - S elements, where V = all
+		// nodes of the graph and S contains the nodes
+		// so far processed. 
 		while (!pQ.isEmpty()) {
 			Node<E> u = pQ.remove();
-			nodes.add(u);
+			S.add(u);
 			List<Edge<E>> edges = graph.getAdjacency(u);
-			/*
-			System.out.println("Priority of " + u + " = " + u.getDistance() + 
-			        ", adj of " + u + " = " + edges);
-			        */
 			if (edges != null) {
 				for (Edge<E> edge : edges) {
 					Node<E> v = edge.getTarget();
@@ -64,7 +64,7 @@ public class Dijkstra<E extends Comparable<? super E>>
 				}
 			}
 		}
-		return nodes;
+		return S;
 	}
 	
 	private void relax(Node<E> u, Node<E> v, int weight)
