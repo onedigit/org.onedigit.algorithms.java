@@ -7,8 +7,15 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-public class Dijkstra<E extends Comparable<? super E>> implements
-        Iterable<Node<E>>
+/**
+ * An implementation of Dijkstra's algorithm for all pairs shortest paths.
+ * Reference: Introduction to Algorithms, CLRS, 3rd Edition.
+ * 
+ * @author ahmed
+ *
+ * @param <E>
+ */
+public class Dijkstra<E extends Comparable<? super E>>
 {
 	private PriorityQueue<Node<E>> pQ;
 
@@ -43,12 +50,17 @@ public class Dijkstra<E extends Comparable<? super E>> implements
 			Node<E> u = pQ.remove();
 			nodes.add(u);
 			List<Edge<E>> edges = graph.getAdjacency(u);
-			System.out.println("Adj of " + u + " = " + edges);
+			/*
+			System.out.println("Priority of " + u + " = " + u.getDistance() + 
+			        ", adj of " + u + " = " + edges);
+			        */
 			if (edges != null) {
 				for (Edge<E> edge : edges) {
 					Node<E> v = edge.getTarget();
-					// System.out.println("\t" + v);
 					relax(u, v, edge.getWeight());
+					// re-prioritise the node v
+					pQ.remove(v);
+					pQ.add(v);
 				}
 			}
 		}
@@ -63,19 +75,5 @@ public class Dijkstra<E extends Comparable<? super E>> implements
 			v.setDistance(ud + weight);
 			v.setParent(u);
 		}
-	}
-
-	public void print()
-	{
-		while (!pQ.isEmpty()) {
-			Node<E> n = pQ.remove();
-			System.out.println(n);
-		}		
-	}
-
-	@Override
-	public Iterator<Node<E>> iterator()
-	{
-		return pQ.iterator();
 	}
 }

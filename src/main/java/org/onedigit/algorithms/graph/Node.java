@@ -42,6 +42,7 @@ public class Node<E extends Comparable<? super E>> implements
 	public int compareTo(Node<E> other)
 	{
 		return (value.compareTo(other.getValue()));
+	    // return (distance - other.distance);
 	}
 
 	@Override

@@ -28,8 +28,6 @@ public class DijkstraTest
         graph.addEdge(three, four, 11);
         graph.addEdge(three, six, 2);
         graph.addEdge(four, five, 6);
-        graph.addEdge(five, four, 6);
-        graph.addEdge(five, six, 9);
         graph.addEdge(six, five, 9);
         System.out.println(graph);		
         Dijkstra<Integer> dst = new Dijkstra<>();
