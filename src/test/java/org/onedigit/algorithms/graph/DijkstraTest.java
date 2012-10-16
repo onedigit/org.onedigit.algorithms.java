@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Iterator;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -26,12 +27,16 @@ public class DijkstraTest
         graph.addEdge(two, four, 15);
         graph.addEdge(three, four, 11);
         graph.addEdge(three, six, 2);
-        graph.addEdge(six, five, 9);
         graph.addEdge(four, five, 6);
+        graph.addEdge(five, four, 6);
+        graph.addEdge(five, six, 9);
+        graph.addEdge(six, five, 9);
         System.out.println(graph);		
         Dijkstra<Integer> dst = new Dijkstra<>();
-        dst.solve(graph, one);      
-        dst.print();
+        Set<Node<Integer>> nodes = dst.solve(graph, one);     
+        for (Node<Integer> n : nodes) {
+        	System.out.println(n + ": " + n.getDistance());
+        }
 	}
 	
 	public void testPriority()
