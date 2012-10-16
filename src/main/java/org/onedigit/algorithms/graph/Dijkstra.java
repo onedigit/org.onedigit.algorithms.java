@@ -39,6 +39,13 @@ public class Dijkstra<E extends Comparable<? super E>>
 		start.setDistance(0);
 	}
 
+	/**
+	 * Solve the all-pairs shortest path from the given start node
+	 * @param graph Directed graph
+	 * @param start start node
+	 * @return the set S of nodes with their final path length
+	 *         from the start node
+	 */
 	public Set<Node<E>> solve(Graph<E> graph, Node<E> start)
 	{
 		initialise(graph, start);
