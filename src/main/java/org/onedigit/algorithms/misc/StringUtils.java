@@ -41,10 +41,61 @@ public class StringUtils
 		return result.toString();
 	}
 	
+	public static void swap(char[] a, int i, int j)
+	{
+		char c = a[i];
+		a[i] = a[j];
+		a[j] = c;
+	}
+	
+	public static void permute_rr(String prefix, String rest)
+	{
+		if (rest.length() == 0) {
+			System.out.println(prefix);
+		}
+		for (int i = 0; i < rest.length(); i++) {
+			String newPrefix = prefix + String.valueOf(rest.charAt(i));
+			String newRest = rest.substring(0, i) + rest.substring(i + 1); 
+			permute_rr(newPrefix, newRest);
+		}
+	}
+	
+	public static void permute_r(char[] a, int n)
+	{
+		if (n == 1) {
+			System.out.println(a);
+			return;
+		} 
+		for (int i = 0; i < n; i++) {
+			swap(a, i, n-1);
+			permute_r(a, n-1);
+			swap(a, i, n-1);
+		}
+	}
+		
+	public static void permute(String s)
+	{
+		int len = s.length();
+		//
+		// abc, acb, bac, bca, cab, cba
+		// abc, acb, bac, bca, cab, cba
+		// abc, acb
+		// bac, bca
+		// cab, cba
+		// 
+		// abcde
+		// a -> perm(bcde) 
+		//   b -> perm(cde)
+		//     c -> perm(de)
+		//       d -> perm(e)
+		//
+		char[] buf = s.toCharArray();
+		permute_r(buf, s.length());
+		System.out.println();
+	}
+	
 	public static void main(String[] args)
 	{
-		// reverse("Another day in paradise");
-		String s = reverseWords("Another day in paradise", ' ');
-		System.out.println(s);
+		permute_rr("", "abc");
 	}
 }
