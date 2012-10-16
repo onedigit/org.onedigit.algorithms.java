@@ -62,7 +62,8 @@ public class MergeSort
 	
 	public static void main(String[] args)
 	{
-		List<Integer> list = Arrays.asList(50, 10);
+	    // 50, 10, 70, 1, 30
+		List<Integer> list = Arrays.asList(50, 10, 70, 1, 30);
 		sort(list);
 		System.out.println(list);
 	}
