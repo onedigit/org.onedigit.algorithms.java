@@ -22,9 +22,6 @@ public class MergeSort
 		Object[] M = new Object[lenM];
 		System.arraycopy(a, low, L, 0, lenL);
 		System.arraycopy(a, mid + 1, M, 0, lenM);
-		System.out.println("low = " + low + ", mid = " + mid + ", high = " + high);
-		System.out.println("L = " + Arrays.toString(L));
-		System.out.println("M = " + Arrays.toString(M));
 		int i = 0;
 		int j = 0;
 		for (int k = low; k <= high; k++) {
