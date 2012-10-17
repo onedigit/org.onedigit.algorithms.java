@@ -139,8 +139,6 @@ public class Graph<E extends Comparable<? super E>>
             if (u.getColour() == Colour.WHITE) {
                 u.setColour(Colour.GRAY);
                 List<Edge<E>> edges = getAdjacency(u);
-                // System.out.print(u);
-                // System.out.println(": " + edges);
                 if (edges != null) {
                     Set<Node<E>> nodes = getNodes(edges);
                     for (Node<E> node: nodes) {
@@ -149,7 +147,6 @@ public class Graph<E extends Comparable<? super E>>
                         }
                     }
                 } 
-                // System.out.println(u);
             }
         }
         return result;
