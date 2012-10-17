@@ -1,4 +1,4 @@
-package org.onedigit.algorithms.generic;
+package org.onedigit.algorithms.search;
 
 import java.util.Arrays;
 

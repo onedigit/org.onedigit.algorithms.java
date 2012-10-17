@@ -1,4 +1,4 @@
-package org.onedigit.algorithms;
+package org.onedigit.algorithms.search;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.onedigit.algorithms.generic.BinarySearch;
+import org.onedigit.algorithms.search.BinarySearch;
 
 public class BinarySearchTest
 {
