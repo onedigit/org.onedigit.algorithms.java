@@ -16,6 +16,11 @@ public class Node<E extends Comparable<? super E>> implements
 	private int distance = 0; // used in shortest path algorithms
 	private Node<E> parent = null; // used in shortest path algorithms
 
+	public static <E extends Comparable<? super E>> Node<E> makeNode(E value)
+	{
+		return new Node<E>(value);
+	}
+	
 	public Node(E value)
 	{
 		this.value = value;

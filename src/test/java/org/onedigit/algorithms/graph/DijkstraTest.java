@@ -1,51 +1,71 @@
 package org.onedigit.algorithms.graph;
 
-import static org.junit.Assert.*;
-
-import java.util.Iterator;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.Test;
 
 public class DijkstraTest
 {
 	@Test
-	public void test()
+	public void testShortestPath()
 	{
-        Graph<Integer> graph = new Graph<>();
-        Node<Integer> one = new Node<>(1);
-        Node<Integer> two = new Node<>(2);
-        Node<Integer> three = new Node<>(3);
-        Node<Integer> four = new Node<>(4);
-        Node<Integer> five = new Node<>(5);
-        Node<Integer> six = new Node<>(6);
-        graph.addEdge(one, two, 7);
-        graph.addEdge(one, three, 9);
-        graph.addEdge(one, six, 14);
-        graph.addEdge(two, three, 10);
-        graph.addEdge(two, four, 15);
-        graph.addEdge(three, four, 11);
-        graph.addEdge(three, six, 2);
-        graph.addEdge(four, five, 6);
-        graph.addEdge(six, five, 9);
-        System.out.println(graph);		
-        Dijkstra<Integer> dst = new Dijkstra<>();
-        Set<Node<Integer>> nodes = dst.solve(graph, one);     
-        for (Node<Integer> n : nodes) {
-        	System.out.println(n + ": " + n.getDistance());
-        }
+		// This is the graph shown in the Wikipedia article:
+		// http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+
+		Graph<Integer> graph = new Graph<>();
+		
+		Node<Integer> one = Node.makeNode(1);
+		Node<Integer> two = Node.makeNode(2);
+		Node<Integer> three = Node.makeNode(3);
+		Node<Integer> four = Node.makeNode(4);
+		Node<Integer> five = Node.makeNode(5);
+		Node<Integer> six = Node.makeNode(6);
+
+		graph.addEdge(one, two, 7);
+		graph.addEdge(one, three, 9);
+		graph.addEdge(one, six, 14);
+		graph.addEdge(two, three, 10);
+		graph.addEdge(two, four, 15);
+		graph.addEdge(three, four, 11);
+		graph.addEdge(three, six, 2);
+		graph.addEdge(four, five, 6);
+		graph.addEdge(six, five, 9);
+
+		shortestPath(graph, one, six);
 	}
-	
-	public void testPriority()
+
+	@Test 
+	public void testAnotherShortestPath()
 	{
-		PriorityQueue<Integer> pQ = new PriorityQueue<>();
-		pQ.add(10);
-		pQ.add(50);
-		pQ.add(30);
-		while (pQ.peek() != null) {
-			Integer i = pQ.remove();
-			System.out.println(i);
-		}
+		// This is the graph in Figure 24.2 of CLRS
+		
+		Graph<String> graph = new Graph<>();
+
+		Node<String> s = Node.makeNode("s");
+		Node<String> t = Node.makeNode("t");
+		Node<String> x = Node.makeNode("x");
+		Node<String> y = Node.makeNode("y");
+		Node<String> z = Node.makeNode("z");
+
+		graph.addEdge(s, t, 3);
+		graph.addEdge(s, y, 5);
+		graph.addEdge(t, x, 6);
+		graph.addEdge(t, y, 5);
+		graph.addEdge(x, z, 2);
+		graph.addEdge(z, x, 7);
+		graph.addEdge(z, s, 3);
+		graph.addEdge(y, z, 6);
+		graph.addEdge(y, x, 4);
+		graph.addEdge(y, t, 1);
+		
+		shortestPath(graph, s, x);
+	}
+
+	private <E extends Comparable<? super E>> void shortestPath(Graph<E> graph,
+	        Node<E> u, Node<E> v)
+	{
+		Dijkstra<E> dst = new Dijkstra<>();
+		List<Node<E>> path = dst.getShortestPath(graph, u, v);
+		System.out.println(path);
 	}
 }
