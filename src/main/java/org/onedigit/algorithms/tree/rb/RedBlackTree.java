@@ -86,9 +86,11 @@ public class RedBlackTree<E extends Comparable<? super E>>
 		Node<E> v = search(k2);
 		List<Node<E>> uTree = getParentTree(u);
 		List<Node<E>> vTree = getParentTree(v);
-		uTree.retainAll(vTree); // get the intersection
-		if (!uTree.isEmpty()) {
-			result = uTree.get(uTree.size() - 1);
+		if (uTree != null) {
+			uTree.retainAll(vTree); // get the intersection
+			if (!uTree.isEmpty()) {
+				result = uTree.get(uTree.size() - 1);
+			}
 		}
 		return result;
 	}
