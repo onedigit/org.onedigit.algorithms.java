@@ -2,6 +2,12 @@ package org.onedigit.algorithms.graph;
 
 import java.io.Serializable;
 
+/**
+ * Representation of a vertex or node in {@link Graph}.
+ *  
+ * @author ahmed
+ *
+ */
 public class Node<E extends Comparable<? super E>> implements
         Comparable<Node<E>>, Serializable
 {

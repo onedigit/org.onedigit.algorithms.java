@@ -6,14 +6,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 import java.util.TreeSet;
 
+import org.onedigit.algorithms.graph.Node.Colour;
+
 /**
- * Adjaceny list representation of a Graph
+ * Adjacency list representation of a Graph.
+ * The edges can be either weighted or non-weighted.
+ * If they are non-weighted, we assign a default weight of 0.
+ * 
+ * <p> Reference: Introduction to Algorithms, CLRS, 3rd Edition
  * 
  * @author ahmed
  * 
- * @param <E>
  */
 public class Graph<E extends Comparable<? super E>>
 {
@@ -53,11 +59,20 @@ public class Graph<E extends Comparable<? super E>>
         }
     }    
 
+    /**
+     * Get the adjacency list ({@link List}) of the given node
+     * @param source node for which we require the adjacency
+     * @return {@link List} of {@link Edge}
+     */
     public List<Edge<E>> getAdjacency(Node<E> source)
     {
         return adjacencies.get(source);
     }
 
+    /**
+     * Get all the edges of the graph
+     * @return {@link List} of all the edges ({@link Edge})
+     */
     public List<Edge<E>> getAllEdges()
     {
         List<Edge<E>> edges = new ArrayList<>();
@@ -67,6 +82,11 @@ public class Graph<E extends Comparable<? super E>>
         return edges;
     }
 
+    /**
+     * Get all the nodes contained in the given edge list
+     * @param edges {@link List} of {@link Edge}
+     * @return {@link Set} of {@link Node}
+     */
     public Set<Node<E>> getNodes(List<Edge<E>> edges)
     {
         Set<Node<E>> nodes = new TreeSet<>();
@@ -77,6 +97,10 @@ public class Graph<E extends Comparable<? super E>>
         return nodes;
     }
 
+    /**
+     * Get all the nodes of the graph
+     * @return {@link Set} of {@link Node}
+     */
     public Set<Node<E>> getAllNodes()
     {
         return getNodes(getAllEdges());
@@ -88,6 +112,49 @@ public class Graph<E extends Comparable<? super E>>
         return dotFormat();
     }
 
+    /**
+     * Test whether source is connected to target by any
+     * path in the graph.  We use a depth first search to
+     * do this.
+     * @param source source node
+     * @param target target node
+     * @return
+     */
+    public boolean isConnected(Node<E> source, Node<E> target)
+    {
+        // Colour everything white before start
+        Set<Node<E>> allNodes = getAllNodes();
+        for (Node<E> n : allNodes) {
+            n.setColour(Colour.WHITE);
+        }
+        boolean result = false;
+        Stack<Node<E>> stack = new Stack<>();
+        stack.push(source);
+        while (!stack.empty()) {
+            Node<E> u = stack.pop();
+            if (u.equals(target)) {
+                result = true;
+                break;
+            }
+            if (u.getColour() == Colour.WHITE) {
+                u.setColour(Colour.GRAY);
+                List<Edge<E>> edges = getAdjacency(u);
+                // System.out.print(u);
+                // System.out.println(": " + edges);
+                if (edges != null) {
+                    Set<Node<E>> nodes = getNodes(edges);
+                    for (Node<E> node: nodes) {
+                        if (node.getColour() == Colour.WHITE) {
+                            stack.push(node);
+                        }
+                    }
+                } 
+                // System.out.println(u);
+            }
+        }
+        return result;
+    }
+    
     private boolean edgeContainsNode(List<Edge<E>> edges, Node<E> target)
     {
         boolean result = false;
@@ -134,33 +201,5 @@ public class Graph<E extends Comparable<? super E>>
         }
         sb.append("}");
         return sb.toString();
-    }
-
-    public static void main(String[] args)
-    {
-        Graph<Integer> graph = new Graph<>();
-
-        Node<Integer> one = new Node<>(1);
-        Node<Integer> two = new Node<>(2);
-        Node<Integer> three = new Node<>(3);
-        Node<Integer> four = new Node<>(4);
-        Node<Integer> five = new Node<>(5);
-        Node<Integer> six = new Node<>(6);
-
-        graph.addEdge(one, two, 7);
-        graph.addEdge(one, three, 9);
-        graph.addEdge(one, six, 14);
-        
-        graph.addEdge(two, three, 10);
-        graph.addEdge(two, four, 15);
-        
-        graph.addEdge(three, four, 11);
-        graph.addEdge(three, six, 2);
-        
-        graph.addEdge(six, five, 9);
-        
-        graph.addEdge(four, five, 6);
-        
-        System.out.println(graph);
     }
 }

@@ -1,20 +1,24 @@
 package org.onedigit.algorithms.graph;
 
-import java.io.Serializable;
 
 /**
- * An edge of a graph
+ * Representation of an edge linking two nodes ({@link Node})
+ * in a {@link Graph}.
  * 
  * @author ahmed
  * 
- * @param <E>
  */
-public class Edge<E extends Comparable<? super E>> implements Comparable<Edge<E>>, Serializable
+public class Edge<E extends Comparable<? super E>> implements Comparable<Edge<E>>
 {
     private Node<E> source;
     private Node<E> target;
     private int weight;
 
+    /**
+     * Default constructor assigns a weight of 0 to the edge
+     * @param source
+     * @param target
+     */
     public Edge(Node<E> source, Node<E> target)
     {
         this.source = source;

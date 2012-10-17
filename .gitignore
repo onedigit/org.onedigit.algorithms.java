@@ -4,3 +4,4 @@ bin
 org.onedigit.algorithms.iml
 /graph.dot
 /graph.pdf
+.DS_Store
