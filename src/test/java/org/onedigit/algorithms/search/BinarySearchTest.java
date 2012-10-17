@@ -16,10 +16,10 @@ public class BinarySearchTest
     public void test()
     {
         int a[] = {2, 3, 10, 20, 50, 100};
-        int ret = BinarySearch.search(a, 50, 0, a.length - 1);
+        int ret = BinarySearch.search_r(a, 50, 0, a.length - 1);
         Assert.assertEquals(4, ret);
         
-        ret = BinarySearch.search(a, 100);
+        ret = BinarySearch.search_i(a, 100);
         Assert.assertEquals(5, ret);
     }
 }
