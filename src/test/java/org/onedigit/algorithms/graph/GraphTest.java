@@ -21,7 +21,7 @@ public class GraphTest
     {
         String os = System.getProperty("os.name");
         System.out.println("Running tests on " + os);
-        if (os.equals("Windows")) {
+        if (os.contains("Windows")) {
             ACROBAT = "C:\\Program Files\\Adobe\\Reader 9.0\\Reader\\AcroRd32.exe";
             NEATO = "C:\\Apps\\Graphviz 2.28\\bin\\neato.exe";
             DOT = "C:\\Apps\\Graphviz 2.28\\bin\\dot.exe";
@@ -39,7 +39,7 @@ public class GraphTest
     Node<Integer> five = new Node<>(5);
     Node<Integer> six = new Node<>(6);
 
-    // @Test
+    @Test
     public void test() throws IOException
     {
         Graph<Integer> graph = makeGraph();

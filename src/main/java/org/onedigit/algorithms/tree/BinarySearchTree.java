@@ -40,7 +40,7 @@ public class BinarySearchTree<T extends Comparable<? super T>>
             }
         }
         Node<T> node = new Node<T>(key);
-        node.pred = y;
+        node.parent = y;
         if (y == null) {
             root = node; // Tree was empty
         } else if (node.key.compareTo(y.key) < 0){
@@ -77,15 +77,15 @@ public class BinarySearchTree<T extends Comparable<? super T>>
      */
     private void transplant(Node<T> u, Node<T> v)
     {
-        if (u.pred == null) { // u is root
+        if (u.parent == null) { // u is root
             root = v;
-        } else if (u.equals(u.pred.left)) {
-            u.pred.left = v;
+        } else if (u.equals(u.parent.left)) {
+            u.parent.left = v;
         } else {
-            u.pred.right = v;
+            u.parent.right = v;
         }
         if (v != null) {
-            v.pred = u.pred;
+            v.parent = u.parent;
         }
     }
     
