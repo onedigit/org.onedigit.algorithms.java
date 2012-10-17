@@ -80,6 +80,9 @@ public class Dijkstra<E extends Comparable<? super E>>
 			if (edges != null) {
 				for (Edge<E> edge : edges) {
 					Node<E> v = edge.getTarget();
+					// Ensure we don't violate the loop invariant by 
+					// inadvertently adding a node to the queue that has 
+					// already been assigned the correct weight.
 					if (relax(u, v, edge.getWeight())) {
 						// 	re-prioritise the node v
 						pQ.remove(v);
