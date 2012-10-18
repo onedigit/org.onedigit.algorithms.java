@@ -1,9 +1,9 @@
 package org.onedigit.algorithms.tree.rb;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
-import java.util.TreeSet;
 
 import org.onedigit.algorithms.tree.Node;
 import org.onedigit.algorithms.tree.Node.Colour;
@@ -112,6 +112,60 @@ public class RedBlackTree<E extends Comparable<? super E>>
 		return list;
 	}
 
+	public String dotFormat()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("digraph G {\n");
+		sb.append("\tnodesep=1.0;\n");
+		sb.append("\tnode [shape=circle];\n");
+		Stack<Node<E>> stack = new Stack<>();
+		stack.push(root);
+		while (!stack.empty()) {
+			Node<E> node = stack.pop();
+			if (node != null) {
+				if (node.getLeft() != null) {
+					sb.append("\t\"" + node + "\" -> \"" + 
+							node.getLeft() + "\";\n");
+					stack.push(node.getLeft());
+				}
+				if (node.getRight() != null) {
+					sb.append("\t\"" + node + "\" -> \"" + 
+							node.getRight() + "\";\n");
+					stack.push(node.getRight());
+				}
+			}
+		}
+		sb.append("}");
+		return sb.toString();
+	}
+
+	public String neatoFormat()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("graph G {\n");
+		// sb.append("{edge [len=3];\n")
+		sb.append("{edge;\n");
+		Stack<Node<E>> stack = new Stack<>();
+		stack.push(root);
+		while (!stack.empty()) {
+			Node<E> node = stack.pop();
+			if (node != null) {
+				if (node.getLeft() != null) {			
+					sb.append("\t" + node + " -- " + node.getLeft() + ";\n");
+					stack.push(node.getLeft());
+				}
+				if (node.getRight() != null) {
+					sb.append("\t" + node + " -- " + node.getRight() + ";\n");
+					stack.push(node.getRight());
+				}
+			}
+		}
+		sb.append("}");
+		return sb.toString();
+	}	
+	
+	// ------------------------------------------------------------------------
+	
 	private void rotateLeft(Node<E> x)
 	{
 		Node<E> y = x.getRight();
@@ -223,54 +277,4 @@ public class RedBlackTree<E extends Comparable<? super E>>
 		}
 		root.setColour(Colour.BLACK);
 	}
-	
-	public String dotFormat()
-	{
-		StringBuilder sb = new StringBuilder();
-		sb.append("digraph G {\n");
-		sb.append("\tnodesep=1.0;\n");
-		sb.append("\tnode [shape=circle];\n");
-		Stack<Node<E>> stack = new Stack<>();
-		stack.push(root);
-		while (!stack.empty()) {
-			Node<E> node = stack.pop();
-			if (node != null) {
-				if (node.getLeft() != null) {
-					sb.append("\t\"" + node + "\" -> \"" + node.getLeft() + "\";\n");
-					stack.push(node.getLeft());
-				}
-				if (node.getRight() != null) {
-					sb.append("\t\"" + node + "\" -> \"" + node.getRight() + "\";\n");
-					stack.push(node.getRight());
-				}
-			}
-		}
-		sb.append("}");
-		return sb.toString();
-	}
-
-	public String neatoFormat()
-	{
-		StringBuilder sb = new StringBuilder();
-		sb.append("graph G {\n");
-		// sb.append("{edge [len=3];\n")
-		sb.append("{edge;\n");
-		Stack<Node<E>> stack = new Stack<>();
-		stack.push(root);
-		while (!stack.empty()) {
-			Node<E> node = stack.pop();
-			if (node != null) {
-				if (node.getLeft() != null) {			
-					sb.append("\t" + node + " -- " + node.getLeft() + ";\n");
-					stack.push(node.getLeft());
-				}
-				if (node.getRight() != null) {
-					sb.append("\t" + node + " -- " + node.getRight() + ";\n");
-					stack.push(node.getRight());
-				}
-			}
-		}
-		sb.append("}");
-		return sb.toString();
-	}	
 }
