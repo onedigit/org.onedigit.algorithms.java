@@ -1,5 +1,10 @@
 package org.onedigit.algorithms.misc;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.onedigit.algorithms.maths.Factorial;
+
 public class StringUtils
 {
 	public static String reverse(String s)
@@ -48,22 +53,22 @@ public class StringUtils
 		a[j] = c;
 	}
 	
-	public static void permute_rr(String prefix, String rest)
+	public static void permute_rr(String prefix, String rest, List<String> list)
 	{
 		if (rest.length() == 0) {
-			System.out.println(prefix);
+			list.add(prefix);
 		}
 		for (int i = 0; i < rest.length(); i++) {
 			String newPrefix = prefix + String.valueOf(rest.charAt(i));
 			String newRest = rest.substring(0, i) + rest.substring(i + 1); 
-			permute_rr(newPrefix, newRest);
+			permute_rr(newPrefix, newRest, list);
 		}
 	}
 	
 	public static void permute_r(char[] a, int n)
 	{
 		if (n == 1) {
-			System.out.println(a);
+		    System.out.println(a);
 			return;
 		} 
 		for (int i = 0; i < n; i++) {
@@ -73,11 +78,13 @@ public class StringUtils
 		}
 	}
 		
-	public static void permute(String s)
+	public static List<String> permute(String s)
 	{
-		char[] buf = s.toCharArray();
-		permute_r(buf, s.length());
-		System.out.println();
+	    List<String> list = new ArrayList<>(Factorial.factorial(s.length()));
+		// char[] buf = s.toCharArray();
+		// permute_r(buf, s.length(), list);
+	    permute_rr("", s, list);
+	    return list;
 	}
 	
 	/*
@@ -100,7 +107,8 @@ public class StringUtils
 	
 	public static void main(String[] args)
 	{
-		permute_rr("", "abc");
+		List<String> list = permute("abc");
+		System.out.println(list);
 		System.out.println(reverse("Another day in paradise"));
 		String s = reverseWords("Another day in paradise", ' ');
 		System.out.println(s);
