@@ -4,37 +4,48 @@ import java.util.Arrays;
 
 public class QuickSort
 {
-	static void qsort(int[] arr, int begin, int end)
+    public static void sort(int[] arr)
+    {
+        qsort(arr, 0, arr.length - 1);
+    }
+    
+    private static void qsort(int[] arr, int left, int right)
+    {
+        if (right <= left) { // single element, already sorted
+            return;
+        }
+        int middle = partition(arr, left, right);
+        qsort(arr, left, middle - 1);
+        System.out.println("Doing right..., middle = " + middle + ", right = " + right 
+                + " a = " + Arrays.toString(arr));
+        qsort(arr, middle + 1, right);
+    }
+    
+    private static int partition(int[] arr, int left, int right)
 	{
-		System.out.println("Input arr: " + Arrays.toString(arr));
-		// get the pivot, i.e. middle element
-		int pivot = (end - begin) >>> 1;
-		System.out.println("pivot = " + pivot);
-		swap(arr, begin, pivot);
-		System.out.println("After swapping pivot: " + Arrays.toString(arr));
-		
+	    // get the pivot, i.e. middle element
+		int pivot = (right - left) >>> 1;
+		System.out.print("Pivot pos = " + pivot + ", pivot = " + arr[pivot]);
 		// arrange left and right halves on either side of pivot
-		int p = begin + 1;
-		int q = end - 1;
-		while (p < q) {
-			if (arr[p] <= arr[pivot]) {
-				p++;
-			} else {
-				swap(arr, p, q);
-				q--;
-			}
+		int p = left;
+		int q = right;
+		while (p <= q) {
+		    while (arr[p] < arr[pivot]) {
+		        p++;
+		    }
+		    while (arr[q] > arr[pivot]) {
+		        q--;
+		    }
+		    if (p <= q) {
+		        swap(arr, p, q);
+		        p++;
+		        q--;
+		    }
 		}
-		// put pivot in the right place
-		System.out.println("q = " + q);
-		swap(arr, begin, q);
+		System.out.println(", After partition: " + Arrays.toString(arr));
+		return p;  // final position of pivot
 	}
 	
-	/**
-	 * Swap elements at indices i and j
-	 * @param arr
-	 * @param i
-	 * @param j
-	 */
 	private static void swap(int[] arr, int i, int j)
 	{
 		int tmp = arr[i];
@@ -45,7 +56,8 @@ public class QuickSort
 	public static void main(String[] args)
 	{
 		int[] a = {70, 50, 20, 80, 5, 25, 90};
-		qsort(a, 0, a.length);
+		System.out.println("Input arr: " + Arrays.toString(a));
+		sort(a);
 		System.out.println("After qsort: " + Arrays.toString(a));
 	}
 }
