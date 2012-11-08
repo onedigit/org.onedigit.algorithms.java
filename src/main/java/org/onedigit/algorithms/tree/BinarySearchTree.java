@@ -1,5 +1,7 @@
 package org.onedigit.algorithms.tree;
 
+import java.util.Stack;
+
 /**
  * Binary search tree.
  * Reference: Introduction to Algorithms, CLRS, 3rd Edition
@@ -136,59 +138,81 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     
     // ------------------------------------------------------------------------
     
-    public String inOrderTreeWalk()
+    public void inOrderTreeWalk(NodeVisitor<T> visitor)
     {
-        StringBuilder sb = new StringBuilder();
-        inOrderTreeWalk(root, sb);
-        return sb.toString();
+        inOrderTreeWalk(root, visitor);
     }
     
-    private void inOrderTreeWalk(Node<T> node, StringBuilder sb)
+    private void inOrderTreeWalk(Node<T> node, NodeVisitor<T> visitor)
     {
         if (node != null) {
-            inOrderTreeWalk(node.left, sb);
-            sb.append(node.key);
-            sb.append(" ");
-            inOrderTreeWalk(node.right, sb);
+            inOrderTreeWalk(node.left, visitor);
+            visitor.visit(node);
+            inOrderTreeWalk(node.right, visitor);
         }
     }    
     
-    // ------------------------------------------------------------------------
-    
-    public String preOrderTreeWalk()
+    // TODO
+    public void inOrderTreeWalkIterative(NodeVisitor<T> visitor)
     {
-        StringBuilder sb = new StringBuilder();
-        preOrderTreeWalk(root, sb);
-        return sb.toString();
+        
     }
     
-    private void preOrderTreeWalk(Node<T> node, StringBuilder sb)
+    // ------------------------------------------------------------------------
+    
+    public void preOrderTreeWalk(NodeVisitor<T> visitor)
+    {
+        preOrderTreeWalk(root, visitor);
+    }
+    
+    private void preOrderTreeWalk(Node<T> node, NodeVisitor<T> visitor)
     {
         if (node != null) {
-            sb.append(node.key);
-            sb.append(" ");
-            preOrderTreeWalk(node.left, sb);
-            preOrderTreeWalk(node.right, sb);
+            visitor.visit(node);
+            preOrderTreeWalk(node.left, visitor);
+            preOrderTreeWalk(node.right, visitor);
+        }
+    }
+    
+    public void preOrderTreeWalkIterative(NodeVisitor<T> nodeVisitor)
+    {
+        Node<T> node = root;
+        if (node != null) {
+            Stack<Node<T>> stack = new Stack<>();
+            stack.push(node);
+            while (!stack.isEmpty()) {
+                node = stack.pop();
+                nodeVisitor.visit(node); // visit node
+                if (node.right != null) {
+                    stack.push(node.right);
+                }
+                if (node.left != null) {
+                    stack.push(node.left);
+                }
+            }
         }
     }
 
     // ------------------------------------------------------------------------
     
-    public String postOrderTreeWalk()
+    public void postOrderTreeWalk(NodeVisitor<T> visitor)
     {
-        StringBuilder sb = new StringBuilder();
-        postOrderTreeWalk(root, sb);
-        return sb.toString();
+        postOrderTreeWalk(root, visitor);
     }
 
-    private void postOrderTreeWalk(Node<T> node, StringBuilder sb)
+    private void postOrderTreeWalk(Node<T> node, NodeVisitor<T> visitor)
     {
         if (node != null) {
-            postOrderTreeWalk(node.left, sb);
-            postOrderTreeWalk(node.right, sb);
-            sb.append(node.key);
-            sb.append(" ");
+            postOrderTreeWalk(node.left, visitor);
+            postOrderTreeWalk(node.right, visitor);
+            visitor.visit(node);
         }
+    }
+    
+    // TODO
+    public void postOrderTreeWalkIterative(NodeVisitor<T> visitor)
+    {
+        
     }
     
     // ------------------------------------------------------------------------    

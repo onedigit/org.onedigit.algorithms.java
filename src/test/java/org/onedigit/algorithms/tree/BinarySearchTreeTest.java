@@ -10,21 +10,34 @@ public class BinarySearchTreeTest
     @Test
     public void test()
     {
+        final StringBuilder sb = new StringBuilder();
+        NodeVisitor<Integer> nodeVisitor = new NodeVisitor<Integer>() {
+            @Override
+            public void visit(Node<Integer> node)
+            {
+                sb.append(node);
+                sb.append(" ");
+            }
+        };
+        
     	BinarySearchTree<Integer> bst = new BinarySearchTree<>();
         makeTree(bst, 11, 2, 14, 1, 7, 15, 5, 8, 4);
 
-        System.out.print("InOrder: " + bst.inOrderTreeWalk());
-        System.out.println();
+        sb.setLength(0);
+        bst.inOrderTreeWalk(nodeVisitor);
+        System.out.println("InOrder: " + sb.toString());
+
+        sb.setLength(0);
+        bst.preOrderTreeWalk(nodeVisitor);
+        System.out.println("PreOrder: " + sb.toString());
+
+        sb.setLength(0);
+        bst.preOrderTreeWalkIterative(nodeVisitor);
+        System.out.println("PreOrder Iterative: " + sb.toString());
         
-        System.out.print("PreOrder: " + bst.preOrderTreeWalk());
-        System.out.println();
-        
-        System.out.print("PostOrder: " + bst.postOrderTreeWalk());
-        System.out.println();
-        
-        byte b = -128;
-        short s = 32767;
-        System.out.println(Math.pow(2, 16));
+        sb.setLength(0);
+        bst.postOrderTreeWalk(nodeVisitor);
+        System.out.println("PostOrder: " + sb.toString());
     }
     
     @Test
