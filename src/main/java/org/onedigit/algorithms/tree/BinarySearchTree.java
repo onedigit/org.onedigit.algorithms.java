@@ -155,7 +155,23 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     // TODO
     public void inOrderTreeWalkIterative(NodeVisitor<T> visitor)
     {
-        
+        Stack<Node<T>> stack = new Stack<>();
+        Node<T> node = root;
+        boolean done = false;
+        while (!done) {
+            if (node != null) {
+                stack.push(node);
+                node = node.left;
+            } else {
+                if (!stack.isEmpty()) {
+                    node = stack.pop();
+                    visitor.visit(node);
+                    node = node.right;
+                } else {
+                    done = true;
+                }
+            }
+        }
     }
     
     // ------------------------------------------------------------------------

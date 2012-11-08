@@ -25,19 +25,23 @@ public class BinarySearchTreeTest
 
         sb.setLength(0);
         bst.inOrderTreeWalk(nodeVisitor);
-        System.out.println("InOrder: " + sb.toString());
-
+        System.out.println("InOrder: \t\t" + sb.toString());
+        
+        sb.setLength(0);
+        bst.inOrderTreeWalkIterative(nodeVisitor);
+        System.out.println("InOrder Iterative: \t" + sb.toString());
+        
         sb.setLength(0);
         bst.preOrderTreeWalk(nodeVisitor);
-        System.out.println("PreOrder: " + sb.toString());
+        System.out.println("PreOrder: \t\t" + sb.toString());
 
         sb.setLength(0);
         bst.preOrderTreeWalkIterative(nodeVisitor);
-        System.out.println("PreOrder Iterative: " + sb.toString());
+        System.out.println("PreOrder Iterative: \t" + sb.toString());
         
         sb.setLength(0);
         bst.postOrderTreeWalk(nodeVisitor);
-        System.out.println("PostOrder: " + sb.toString());
+        System.out.println("PostOrder: \t\t" + sb.toString());
     }
     
     @Test
