@@ -32,7 +32,7 @@ public class SinglyLinkedList<E>
 		}
 	}
 	
-	public void remove(E value)
+	public void remove__(E value)
 	{
 		if (head == null) {
 			return;
@@ -43,7 +43,7 @@ public class SinglyLinkedList<E>
 		while (current != null) {
 			if (current.value.equals(value)) {
 				current.next = null;
-				if (prev != null) {
+				if (prev != null) { // in case we are at head
 					prev.next = next;
 				}
 				if (current == head) {
@@ -73,6 +73,34 @@ public class SinglyLinkedList<E>
 		Node tmp = head;
 		head = tail;
 		tail = tmp;
+	}
+	
+	public void remove(E value)
+	{
+	    if (head == null) {
+	        return;
+	    }
+	    Node prev = null;
+	    Node current = head;
+	    Node next = current.next;
+	    while (current != null) {
+	        if (current.value.equals(value)) {
+	            current.next = null;
+	            if (prev != null) {
+	                prev.next = next;
+	            }
+	            if (current == head) {
+	                head = next;
+	            }
+	            if (current == tail) {
+	                tail = prev;
+	            }
+	            break;	            
+	        }
+	        prev = current;
+	        current = next;
+	        next = current.next;
+	    }
 	}
 	
 	@Override
